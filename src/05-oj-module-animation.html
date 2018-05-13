@@ -1,0 +1,69 @@
+<script type="text/javascript" src="../node_modules/requirejs/require.js"></script>
+<script type="text/javascript" src="main.js"></script>
+
+<link rel="stylesheet" href="../node_modules/@oracle/oraclejet/dist/css/alta/oj-alta.css">
+
+<style type="text/css">
+  .page{
+    height: 200px;
+    width: 100%;
+    color: white;
+    border: solid 1px silver;
+    border-radius: 3px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .page.green{ 
+    background-color: green;
+  }
+
+  .page.red{ 
+    background-color: red;
+  }
+</style>
+
+<h3>ojModule - Animation</h3>
+
+<oj-buttonset-one class="oj-buttonset-width-auto" value="{{currentModule}}">
+  <oj-option value="first">View One</oj-option>
+  <oj-option value="second">View Two</oj-option>
+</oj-buttonset-one>
+
+<div data-bind="ojModule: moduleOptions">
+</div>
+
+<script type="text/javascript">
+  require(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojmoduleanimations',
+  'ojs/ojknockout', 'ojs/ojmodule', 'ojs/ojbutton'], function(oj, ko, $) {
+    function SimpleModuleModel() {
+      let self = this;
+      this.currentModule = ko.observable("second");
+
+      this.moduleOptions = ko.observable({
+        view: '<div>Hello World</div>',
+        viewModel: {}
+      });
+
+      this.currentModule.subscribe(function(val) {
+        if(val === 'first') {
+          self.moduleOptions({
+            animation: oj.ModuleAnimations['zoomIn'],
+            view: '<div class="page green">First Page</div>',
+            viewModel: {}
+          });
+        }
+        if(val === 'second') {
+          self.moduleOptions({
+            animation: oj.ModuleAnimations['zoomIn'],
+            view: '<div class="page red">Second Page</div>',
+            viewModel: {}
+          });
+        }
+      });
+    }
+    ko.applyBindings(new SimpleModuleModel());
+  });
+</script>
