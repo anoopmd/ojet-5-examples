@@ -1,0 +1,15 @@
+{
+  "name": "ojet-5-examples",
+  "version": "1.0.0",
+  "description": "Oracle JavaScript Extension Toolkit(JET) v5 Examples",
+  "dependencies": {
+    "@oracle/oraclejet": "~5.0.0",
+    "lodash": "^4.17.5"
+  },
+  "devDependencies": {
+    "body-parser": "^1.9.0",
+    "cors": "^2.4.2",
+    "express": "^4.9.7",
+    "http-server": "^0.11.1"
+  }
+}
