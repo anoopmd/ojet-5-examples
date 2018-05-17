@@ -1,0 +1,64 @@
+<script type="text/javascript" src="../node_modules/requirejs/require.js"></script>
+<script type="text/javascript" src="main.js"></script>
+
+<link rel="stylesheet" href="../node_modules/@oracle/oraclejet/dist/css/alta/oj-alta.css">
+
+<h3>List View with Observable Array</h3>
+
+<div class='oj-flex-bar'>
+  <div class='oj-flex-bar-start'>
+    <label for="inputItem" class="oj-label-inline">Add item to the end:</label>
+  </div>
+  <div class='oj-flex-bar-middle'>
+    <oj-input-text id="inputItem" value="{{itemToAdd}}">
+    </oj-input-text>
+  </div>
+</div>
+<oj-button on-click="[[addItem]]">Add</oj-button>
+<oj-button on-click="[[removeSelected]]">Remove</oj-button>
+
+<oj-list-view id="listview" aria-label="list using observable array" 
+    data="[[dataProvider]]" selection-mode="multiple" selection="{{selectedItems}}" item.renderer="[[renderer]]">
+</oj-list-view>
+
+<script type="text/javascript">
+  require(['ojs/ojcore', 'knockout', 'jquery',
+  'ojs/ojknockout', 'promise', 'ojs/ojlistview',
+  'ojs/ojarraydataprovider', 'ojs/ojbutton', 'ojs/ojinputtext'], function(oj, ko, $) {
+    var BetterListModel = function () {
+      var self = this;
+      this.itemToAdd = ko.observable();
+      this.selectedItems = ko.observableArray([]);
+      this.allItems = ko.observableArray([{"id": 1, "item": "Milk"},
+                                          {"id": 2, "item": "Flour"}, 
+                                          {"id": 3, "item": "Sugar"},
+                                          {"id": 4, "item": "Vanilla Extract"}
+                                         ]);
+
+      var lastItemId = this.allItems().length;
+      this.dataProvider = new oj.ArrayDataProvider(this.allItems);
+
+      this.addItem = function () {
+        if ((self.itemToAdd() != "") && (self.allItems.indexOf(self.itemToAdd()) < 0)) {
+          lastItemId++;
+          self.allItems.push({"id": lastItemId, "item": self.itemToAdd()});
+        }
+        self.itemToAdd(""); // Clear the text box
+      };
+
+      this.removeSelected = function () {
+          $.each(self.selectedItems(), function(index, value) {
+              self.allItems.remove(function(item) {
+                  return (item.id == value);
+              });
+          });
+      }; 
+
+      this.renderer = function(context) {
+          return {'insert':context['data']['item']};
+      };
+
+    };
+    ko.applyBindings(new BetterListModel());
+  });
+</script>
