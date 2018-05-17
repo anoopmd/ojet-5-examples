@@ -1,0 +1,9 @@
+simple-alert:not(.oj-complete){
+  visibility: hidden;
+}
+
+simple-alert{
+  display: inline-block;
+  border: solid 1px blue;
+  padding: 10px 5px;
+}

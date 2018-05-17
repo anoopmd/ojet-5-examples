@@ -1,0 +1,18 @@
+{
+  "name": "simple-alert",
+  "displayName": "simple-alert",
+  "description": "Describe your component here",
+  "version": "1.0.0",
+  "jetVersion": "5.0.0",
+  "properties": {
+  },
+  "methods": {
+
+  }, 
+  "events": {
+
+  }, 
+  "slots": {
+
+  }
+}
