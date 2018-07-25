@@ -1,0 +1,11 @@
+<div class="badge-face">
+  <div class="slot-area-top">
+    <oj-bind-slot name="top"/>
+  </div>
+  <img class="badge-image"
+  data-bind="attr:{src: $props.badgeImage, alt: $props.badgeName}"/>
+  <h3><oj-bind-text value="[[$props.badgeName]]"></oj-bind-text></h3>
+  <div class="slot-area-bottom">
+    <oj-bind-slot name="bottom"/>
+  </div>
+</div>

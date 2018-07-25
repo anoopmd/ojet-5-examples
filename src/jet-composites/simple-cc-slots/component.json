@@ -1,0 +1,27 @@
+{
+  "name": "simple-cc-slots",
+  "displayName": "simple-cc-slots",
+  "description": "Simple CC Component",
+  "version": "1.0.0",
+  "jetVersion": "5.0.0",
+  "properties":{
+    "badgeName" : {
+      "type" : "string"
+    },
+    "badgeImage" : {
+      "type" : "string"
+    }
+  },
+  "methods": {
+  }, 
+  "events": {
+  },
+  "slots" : {
+    "top":{
+      "description" : "Top"
+    },
+    "bottom":{
+      "description" : "Bottom"
+    }
+  }
+}
