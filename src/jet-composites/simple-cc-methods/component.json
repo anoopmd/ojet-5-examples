@@ -1,0 +1,33 @@
+{
+  "name": "simple-cc-methods",
+  "displayName": "simple-cc-methods",
+  "description": "Simple CC Component",
+  "version": "1.0.0",
+  "jetVersion": "5.0.0",
+  "properties":{
+    "badgeName" : {
+      "type" : "string"
+    },
+    "badgeImage" : {
+      "type" : "string"
+    }
+  },
+  "methods" : {
+    "changeBackground" : {
+      "description" : "A function to update the background color of the badge",
+      "internalName" : "_setBackgroundColor",
+      "params" : [
+        {
+          "description":"Color name or hex color code",
+          "name" : "colorToSet",
+          "type": "string"
+        }
+      ],
+      "return" : "boolean"
+    }
+  },
+  "events": {
+  }, 
+  "slots": {
+  }
+}

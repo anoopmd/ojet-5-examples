@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../node_modules/@oracle/oraclejet/dist/css/alta/oj-alta.css">
+
+    <script type="text/javascript" src="../../../node_modules/requirejs/require.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+
+    <simple-cc-slots badge-name="Jane Austin" badge-image="http://www.oracle.com/webfolder/technetwork/jet/demo/images/composites/debraphaely.png">
+      <span slot="bottom">Bottom Slot</span>
+      <span slot="top">Top Slot</span>
+    </simple-cc-slots>
+
+    <script>
+    require(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojcomposite', 'ojs/ojknockout',
+        'jet-composites/simple-cc-slots/loader'], function(oj, ko, $) {
+      $(() => ko.applyBindings({}));
+    });
+    </script>
+  </head>
+</html>

@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../node_modules/@oracle/oraclejet/dist/css/alta/oj-alta.css">
+
+    <script type="text/javascript" src="../../../node_modules/requirejs/require.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+
+    <simple-cc-methods id="my-cc" badge-name="Jane Austin" badge-image="http://www.oracle.com/webfolder/technetwork/jet/demo/images/composites/debraphaely.png"></simple-cc-methods>
+
+    <script>
+    require(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojcomposite', 'ojs/ojknockout',
+        'jet-composites/simple-cc-methods/loader'], function(oj, ko, $) {
+      $(() => {
+        ko.applyBindings({});
+        setTimeout(function() {
+          document.getElementById("my-cc").changeBackground('blue');
+        });
+      });
+    });
+    </script>
+  </head>
+</html>
