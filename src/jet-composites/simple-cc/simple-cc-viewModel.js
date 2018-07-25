@@ -1,8 +1,8 @@
 'use strict';
 define(
-    ['ojs/ojcore', 'knockout', 'jquery'], function (oj, ko, $) {
+    ['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout'], function (oj, ko, $) {
 
-    function SimpleAlertComponentModel(context) {
+    function SimpleCCModel(context) {
         var self = this;
         
         //At the start of your viewModel constructor
@@ -40,5 +40,5 @@ define(
     //ExampleComponentModel.prototype.propertyChanged = function(context){
     //};
 
-    return SimpleAlertComponentModel;
+    return SimpleCCModel;
 });

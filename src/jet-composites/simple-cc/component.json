@@ -1,18 +1,15 @@
 {
-  "name": "simple-alert",
-  "displayName": "simple-alert",
-  "description": "Describe your component here",
+  "name": "simple-cc",
+  "displayName": "simple-cc",
+  "description": "Simple CC Component",
   "version": "1.0.0",
   "jetVersion": "5.0.0",
   "properties": {
   },
   "methods": {
-
   }, 
   "events": {
-
   }, 
   "slots": {
-
   }
 }

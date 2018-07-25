@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../node_modules/@oracle/oraclejet/dist/css/alta/oj-alta.css">
+
+    <script type="text/javascript" src="../../../node_modules/requirejs/require.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+
+    <simple-cc></simple-cc>
+
+    <script>
+    require(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojcomposite', 'ojs/ojknockout',
+        'jet-composites/simple-cc/loader'], function(oj, ko, $) {
+      $(() => ko.applyBindings({}));
+    });
+    </script>
+  </head>
+</html>

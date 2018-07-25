@@ -1,0 +1,21 @@
+{
+  "name": "simple-cc-props",
+  "displayName": "simple-cc-props",
+  "description": "Simple CC Component",
+  "version": "1.0.0",
+  "jetVersion": "5.0.0",
+  "properties":{
+    "badgeName" : {
+      "type" : "string"
+    },
+    "badgeImage" : {
+      "type" : "string"
+    }
+  },
+  "methods": {
+  }, 
+  "events": {
+  }, 
+  "slots": {
+  }
+}

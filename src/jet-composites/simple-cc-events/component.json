@@ -1,0 +1,29 @@
+{
+  "name": "simple-cc-events",
+  "displayName": "simple-cc-events",
+  "description": "Simple CC Component",
+  "version": "1.0.0",
+  "jetVersion": "5.0.0",
+  "properties":{
+    "badgeName" : {
+      "type" : "string"
+    },
+    "badgeImage" : {
+      "type" : "string"
+    }
+  },
+  "methods": {
+  },
+  "events" : {
+    "badgeSelected" : {
+      "description" : "The event that consuming views can use to recognize when this badge is selected",
+      "bubbles" : true,
+      "cancelable" : false,
+      "detail" : {
+        "nameOnBadge" : {"type" : "string"}
+      }
+    }
+  }, 
+  "slots": {
+  }
+}

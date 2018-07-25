@@ -1,8 +1,8 @@
-simple-alert:not(.oj-complete){
+simple-cc:not(.oj-complete){
   visibility: hidden;
 }
 
-simple-alert{
+simple-cc{
   display: inline-block;
   border: solid 1px blue;
   padding: 10px 5px;

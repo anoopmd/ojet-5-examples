@@ -1,0 +1,26 @@
+simple-cc-props:not(.oj-complete){
+  visibility: hidden;
+}
+
+simple-cc-props{
+  display : block;
+  width : 200px;
+  height: 200px;
+  margin : 10px;
+}
+
+simple-cc-props .badge-face {
+  height : 100%;
+  width : 100%;
+  background-color : #80C3C8;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 30px;
+}
+
+simple-cc-props .badge-image {
+  height : 100px;
+  width : 100px;
+  border-radius: 50%;
+  border:3px solid white;
+}
