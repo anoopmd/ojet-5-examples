@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../node_modules/@oracle/oraclejet/dist/css/alta/oj-alta.css">
+
+    <script type="text/javascript" src="../../../node_modules/requirejs/require.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+
+    <h4>Converters</h4>
+    <h5>Problem</h5>
+    <div>
+      <ul>
+        <li>Use the currency converter on the OJET Input Text field</li>
+        <li>Use the datetime converter to customize the date display type</li>
+      </ul>
+    </div>
+
+    <oj-input-text value="{{currency}}"
+      converter= '{
+      "type":"number", 
+      "options": {"style": "currency", "currency": "EUR", "currencyDisplay": "symbol"}}'> 
+    </oj-input-text>
+
+    <br>
+
+    <oj-input-date id="date2" value="{{date}}" name="date2" 
+      converter= '{
+          "type":"datetime", 
+          "options": {"year": "numeric", "month": "long", "day": "numeric"}}'>
+    </oj-input-date>
+
+    <script>
+    require(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
+    'ojs/ojinputtext', 'ojs/ojinputnumber', 'ojs/ojformlayout',
+    'ojs/ojdatetimepicker', 'ojs/ojlabel'], function(oj, ko, $) {
+      function ViewModel() {
+        this.currency = ko.observable();
+        this.date = ko.observable();
+      }
+
+      ko.applyBindings(new ViewModel());
+    });
+    </script>
+  </head>
+</html>

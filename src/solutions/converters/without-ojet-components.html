@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../node_modules/@oracle/oraclejet/dist/css/alta/oj-alta.css">
+
+    <script type="text/javascript" src="../../../node_modules/requirejs/require.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+
+    <h4>Converters</h4>
+    <h5>Problem</h5>
+    <ul>
+      <li>Use Number Converter to convert the number to currency</li>
+      <li>Use Datetime Converter to convert the date into preferred format</li>
+    </ul>
+
+    <div class="oj-flex">
+      <div class="oj-flex-sm-4 oj-panel oj-panel-alt4 demo-panel-customizations"> 
+        <h3 class="oj-header-border">Amy Flanagan</h3>
+        <p>Product Manager</p>
+        <span style="white-space:nowrap;"><b>Salary</b>:
+          <span data-bind="text: amySalary"></span></span>
+        <br/>
+        <span style="white-space:nowrap;"><b>Joined</b>:
+          <span data-bind="text: amyStartDate"></span></span>
+        <br/>
+      </div>
+    </div>
+
+    <script>
+    require(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
+    'ojs/ojvalidation-datetime', 'ojs/ojvalidation-number'], function(oj, ko, $) {
+      function ViewModel() {
+        // for salary fields
+        var salOptions = {
+          style: 'currency',
+          currency: 'USD',
+          currencyDisplay: 'symbol',
+          currencyFormat:'standard'};
+        var salaryConverter = oj.Validation.converterFactory("number").createConverter(salOptions);
+
+        this.amySalary = ko.observable(salaryConverter.format(125475.00));
+
+        // for date fields
+        var dateOptions = {formatStyle: 'date', dateFormat: 'medium'};
+        var dateConverter = oj.Validation.converterFactory("datetime").createConverter(dateOptions);
+        self.amyStartDate = ko.observable(dateConverter.format("2014-01-02"));
+      }
+
+      ko.applyBindings(new ViewModel());
+    });
+    </script>
+  </head>
+</html>

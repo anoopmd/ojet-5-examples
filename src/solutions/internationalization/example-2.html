@@ -1,0 +1,94 @@
+<head>
+  <link rel="stylesheet" href="../../../node_modules/@oracle/oraclejet/dist/css/alta/oj-alta.css">
+
+  <script type="text/javascript" src="../../../node_modules/requirejs/require.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+</head>
+
+<div id="content">
+  <!-- ko foreach: toolbarButtons -->
+  <oj-button data-bind="attr:{'id':label}" display='icons' on-click="[[$parent.setLang]]">
+    <span data-bind="text: label"></span>
+  </oj-button>
+  <!-- /ko -->
+
+  <h4>Click a language the locale changes below</h4>
+  <div>
+    <oj-menu-button id="menuButton">
+      <span data-bind='text: localeLabel'></span>
+      <!-- To handle menu item selection, use an action listener as shown, not a click listener. -->
+      <oj-menu id="buttonMenu" slot="menu" on-oj-action="[[changeLabel]]">
+        <!-- ko foreach: menuNames -->
+          <oj-option value="[[itemName]]" data-bind="attr:{'id':itemName}">
+            <span data-bind="text: itemName"></span>
+          </oj-option>
+        <!-- /ko -->
+      </oj-menu>
+    </oj-menu-button>
+  </div>
+</div>
+
+<script type="text/javascript">
+  require(['ojs/ojcore', 'knockout', 'jquery',
+  'ojs/ojmenu', 'ojs/ojbutton',
+  'ojs/ojknockout', 'promise', 'ojs/ojtoolbar'], function(oj, ko, $) {
+    let ViewModel = function() {
+      let self = this;
+      this.localeLabel = ko.observable();
+      this.menuNames = ko.observableArray([]);
+
+      this.toolbarButtons = [
+        {"label": "english"},
+        {"label": "français"},
+        {"label": "čeština"}
+      ];
+
+      this.setLang = function (evt) {
+        var newLang = '';
+        var lang = evt.currentTarget.id;
+        switch (lang) {
+          case 'čeština':
+            newLang = 'cs-CZ';
+            break;
+          case 'français':
+            newLang = 'fr-FR';
+            break;
+          default:
+            newLang = 'en-US';
+        }
+        oj.Config.setLocale(newLang, function () {
+          $('html').attr('lang', newLang);
+          // in this callback function we can update whatever is needed with the new locale. 
+          // In this example, we reload the menu items
+          self.loadMenu();
+        });
+      };
+
+      this.loadMenu = function() {
+        self.menuNames([
+          {'itemName': oj.Translations.getTranslatedString('menu1')},
+          {'itemName': oj.Translations.getTranslatedString('menu2')},
+          {'itemName': oj.Translations.getTranslatedString('menu3')}
+        ]);
+        self.localeLabel(oj.Translations.getTranslatedString('label'));
+
+        //wait until the section of the page we want, is fully loaded.
+        var node = document.getElementById('content');
+        var busyContext = oj.Context.getContext(node).getBusyContext();
+        busyContext.whenReady().then(function(){
+          
+          // since we've modified the children of a jqueryUI component, we need to refresh it to get all of the build in styling again
+          document.getElementById('menuButton').refresh();
+        });
+      };
+
+      this.changeLabel = function (evt) {
+        self.localeLabel(oj.Translations.getTranslatedString(evt.target.value));
+      }
+
+      this.loadMenu();
+    }
+
+    ko.applyBindings(new ViewModel());
+  });
+</script>

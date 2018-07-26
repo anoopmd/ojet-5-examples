@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../node_modules/@oracle/oraclejet/dist/css/alta/oj-alta.css">
+
+    <script type="text/javascript" src="../../../node_modules/requirejs/require.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+
+    <!-- <html lang="fr-FR"> -->
+      <oj-input-date-time id="datetimepickercontrol" placeholder="placeholder text" value='{{date}}'> </oj-input-date-time>
+    <!-- </html> -->
+
+    <script>
+    require(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout',
+    'promise', 'ojs/ojdatetimepicker'],
+    function(oj, ko, $) {
+      let date = new Date();
+      ko.applyBindings({
+        date: date.toISOString()
+      });
+
+      setTimeout(function(){
+        oj.Config.setLocale("fr-FR");
+        console.log("Locale Set");
+      }, 2000);
+    });
+    </script>
+  </head>
+</html>

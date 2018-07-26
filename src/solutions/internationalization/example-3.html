@@ -1,0 +1,53 @@
+<head>
+  <link rel="stylesheet" href="../../../node_modules/@oracle/oraclejet/dist/css/alta/oj-alta.css">
+
+  <script type="text/javascript" src="../../../node_modules/requirejs/require.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+</head>
+
+<div id="content">
+  <!-- ko foreach: toolbarButtons -->
+  <oj-button data-bind="attr:{'id':label}" on-click="[[$parent.setLang]]">
+    <span data-bind="text: label"></span>
+  </oj-button>
+  <!-- /ko -->
+
+  <h4>Click a language the locale changes below</h4>
+  <div data-bind="text:helloworld"></div>
+</div>
+
+<script type="text/javascript">
+  require(['ojs/ojcore', 'knockout', 'jquery',
+  'ojs/ojmenu', 'ojs/ojbutton',
+  'ojs/ojknockout', 'promise', 'ojs/ojtoolbar'], function(oj, ko, $) {
+    let ViewModel = function() {
+      let self = this;
+      this.helloworld = ko.observable("Hello World");
+
+      this.toolbarButtons = [
+        {"label": "english"},
+        {"label": "français"},
+      ];
+
+      this.setLang = function (evt) {
+        var newLang = '';
+        var lang = evt.currentTarget.id;
+        switch (lang) {
+          case 'français':
+            newLang = 'fr-FR';
+            break;
+          default:
+            newLang = 'en-US';
+        }
+        oj.Config.setLocale(newLang, function () {
+          $('html').attr('lang', newLang);
+          // in this callback function we can update whatever is needed with the new locale. 
+          // In this example, we reload the menu items
+          self.helloworld(oj.Translations.getTranslatedString('helloworld'));
+        });
+      };
+    }
+
+    ko.applyBindings(new ViewModel());
+  });
+</script>
