@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../node_modules/@oracle/oraclejet/dist/css/alta/oj-alta.css">
+
+    <script type="text/javascript" src="../../../node_modules/requirejs/require.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+
+    <!-- <oj-messages messages="{{applicationMessages}}"
+      display="[[messagesDisplay]]" position="[[messagesPosition]]"
+      :style="[[messagesStyle]]">
+    </oj-messages> -->
+
+
+    <oj-dialog style="display:none; width:80vw; height:80vh;" initial-visibility="show"
+               id="messagesContainerDialog" title="Messages container dialog"
+               position='{"my": {"vertical":"top", "horizontal": "end"}, 
+                          "at": {"vertical": "top", "horizontal": "end"},
+                          "of": "window"}'>
+      <div slot="body" style="padding-top:0;" >
+        
+        <!-- Use oj-defer because we do not want to create oj-messages until dialog shows -->
+        <oj-defer>
+          
+          <!-- Messages -->
+          <oj-messages id="oj-messages-id" messages="{{applicationMessages}}"
+                       display="[[messagesDisplay]]" position="[[messagesPosition]]" 
+                       :style="[[messagesStyle]]">
+          </oj-messages>
+          
+        </oj-defer>
+      </div>
+    </oj-dialog>
+
+    <script>
+    require(['ojs/ojcore', 'knockout', 'jquery','ojs/ojknockout',
+      'ojs/ojbutton', 'ojs/ojdialog', 'ojs/ojselectcombobox',
+      'ojs/ojdefer', 'ojs/ojmessages'
+    ], function(oj, ko, $) {
+      function MessagesViewModel() {
+        var self = this;
+
+        self.applicationMessages = [
+          {
+            "severity": "error",
+            "summary": "Error message summary",
+            "detail": "Error message detail",
+            "closeAffordance": "none"
+          },
+          {
+            "severity": "warning",
+            "summary": "Warning message summary",
+            "detail": "Warning message detail",
+            "closeAffordance": "none"
+          }
+        ];
+
+        MessagesViewModel._LAYOUT_MAPPINGS = {
+          "inline": {
+            "display": "general",
+            "style": {"width": "100%", "min-width": "100%", "maxWidth": "100%"},
+            "position":  null
+          },
+          "overlay": {
+            "display": "general",
+            "style": {"width": "60%", "min-width": "60%", "maxWidth": "60%"},
+            "position": {
+              "my": {"vertical": "top", "horizontal": "center"},
+              "at": {"vertical": "top", "horizontal": "center"},
+              "of": "#messagesContainerDialog"
+            }
+          },
+          "notification": {
+            "display": "notification",
+            "style": {"width": "30%", "min-width": "30%", "maxWidth": "30%"},
+            "position": {
+              "my": {"vertical": "top", "horizontal": "end"},
+              "at": {"vertical": "top", "horizontal": "end"},
+              "of": "#messagesContainerDialog"
+            }
+          }
+        }
+
+        self.selectedLayoutOption = ko.observable("overlay");
+
+        // oj-messages popup will evaluate the position based on the width, and will trigger
+        //  element refresh when evaluating position, does not refresh on width changes.
+        //  For self reason, we need to compute the style before the position or display here,
+        //  order is important here.
+        self.messagesStyle = ko.computed(function() {
+          return MessagesViewModel._LAYOUT_MAPPINGS[self.selectedLayoutOption()].style;
+        });
+        
+        self.messagesPosition = ko.computed(function() {
+          return MessagesViewModel._LAYOUT_MAPPINGS[self.selectedLayoutOption()].position;
+        });
+        
+        self.messagesDisplay = ko.computed(function() {
+          return MessagesViewModel._LAYOUT_MAPPINGS[self.selectedLayoutOption()].display;
+        });
+      }
+    
+      ko.applyBindings(new MessagesViewModel());
+
+      setTimeout(function() {
+        document.getElementById("messagesContainerDialog").open();
+      }, 1500);
+    });
+    </script>
+  </head>
+</html>
